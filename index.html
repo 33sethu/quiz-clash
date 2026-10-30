@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11152b">
+  <title>Quiz Clash — Play together</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Quiz Clash home"><span class="brand-mark">QC</span><span>QUIZ CLASH</span></a>
+      <span class="live-label"><span class="live-dot"></span> REAL-TIME QUIZ</span>
+    </header>
+
+    <section id="homeScreen" class="screen hero">
+      <div class="hero-copy">
+        <p class="eyebrow">THINK FAST. PLAY TOGETHER.</p>
+        <h1>Ready, set,<br><span>Quiz Clash.</span></h1>
+        <p class="subhead">Challenge your friends in a live quiz. Ten questions. One winner.</p>
+      </div>
+      <div class="panel home-panel">
+        <label for="nickname">Your nickname</label>
+        <input id="nickname" maxlength="18" placeholder="Enter a nickname" autocomplete="nickname">
+        <button id="createBtn" class="primary">Create a room <span>→</span></button>
+        <div class="or"><span>OR JOIN YOUR FRIENDS</span></div>
+        <label for="roomCode">Room code</label>
+        <input id="roomCode" maxlength="5" placeholder="e.g. K7P2M" autocapitalize="characters">
+        <button id="joinBtn" class="secondary">Join room</button>
+        <p id="homeError" class="error" role="status"></p>
+      </div>
+      <div class="feature-row"><span>2–8 PLAYERS</span><span>10 QUESTIONS</span><span>15 SECONDS EACH</span></div>
+    </section>
+
+    <section id="lobbyScreen" class="screen hidden">
+      <div class="section-heading"><p class="eyebrow">ROOM LOBBY</p><h2>Bring on the challengers.</h2><p>Share your room code with friends.</p></div>
+      <div class="panel lobby-panel">
+        <div class="room-code-box"><span>YOUR ROOM CODE</span><strong id="displayCode">-----</strong><button id="copyCodeBtn" class="small-button">Copy invite link</button></div>
+        <div class="player-heading"><h3>Players <span id="playerCount">1/8</span></h3><span class="waiting"><span class="live-dot"></span> Waiting to start</span></div>
+        <div id="playersList" class="players-list"></div>
+        <button id="startBtn" class="primary full">Start quiz <span>→</span></button>
+        <p id="lobbyHint" class="muted">At least 2 players are needed to start.</p>
+      </div>
+    </section>
+
+    <section id="questionScreen" class="screen hidden">
+      <div class="game-meta"><span id="questionCount">QUESTION 1 OF 10</span><span class="room-pill">ROOM <b id="gameRoomCode"></b></span></div>
+      <div class="timer-wrap"><div id="timerRing" class="timer-ring"><span id="timerText">15</span></div><span>SECONDS LEFT</span></div>
+      <div class="question-card"><p class="eyebrow">GENERAL KNOWLEDGE</p><h2 id="questionText">Loading question...</h2></div>
+      <div id="answersGrid" class="answers-grid"></div>
+      <p id="answerStatus" class="answer-status" aria-live="polite">Choose your answer.</p>
+      <div class="live-score-panel"><div class="live-score-title"><h3>Live standings</h3><span id="answeredText">0 answered</span></div><div id="miniScores" class="mini-scores"></div></div>
+    </section>
+
+    <section id="scoreScreen" class="screen hidden">
+      <div class="section-heading"><p class="eyebrow">ROUND UPDATE</p><h2 id="scoreTitle">Scoreboard</h2><p id="correctAnswerText"></p></div>
+      <div class="panel score-panel"><div id="scoreList" class="score-list"></div><p class="muted center">Next question starting soon...</p></div>
+    </section>
+
+    <section id="finishedScreen" class="screen hidden">
+      <div class="winner-heading"><div class="trophy">WIN</div><p class="eyebrow">QUIZ COMPLETE</p><h1 id="winnerTitle">We have a winner!</h1><p id="winnerSubtitle">Great game, everyone.</p></div>
+      <div class="panel score-panel"><h3>Final rankings</h3><div id="finalList" class="score-list"></div><button id="rematchBtn" class="primary full">Play another round <span>↻</span></button><button id="homeBtn" class="secondary full">Back to home</button></div>
+    </section>
+    <div id="toast" class="toast" role="status"></div>
+    <footer>Made for friends. No accounts. Just bragging rights.</footer>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
